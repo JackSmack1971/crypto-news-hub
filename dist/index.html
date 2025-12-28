@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoSphere - Blockchain News Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Crypto Ticker -->
+    <div class="ticker-wrap">
+        <div class="ticker" id="crypto-ticker">
+            <!-- Ticker items will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="#" class="logo">
+                    <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
+                        <path d="M20 8L20 32M12 16L20 8L28 16M12 24L20 32L28 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="logo-text">CryptoSphere</span>
+                </a>
+            </div>
+            
+            <nav class="main-nav" id="main-nav">
+                <a href="#" class="nav-link active" data-category="all">Home</a>
+                <a href="#" class="nav-link" data-category="defi">DeFi</a>
+                <a href="#" class="nav-link" data-category="nft">NFTs</a>
+                <a href="#" class="nav-link" data-category="regulation">Regulation</a>
+                <a href="#" class="nav-link" data-category="market">Markets</a>
+                <a href="#" class="nav-link" data-category="technology">Technology</a>
+            </nav>
+            
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="Search news...">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                    <div class="search-results" id="search-results"></div>
+                </div>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <nav class="mobile-nav">
+            <a href="#" class="mobile-nav-link active" data-category="all">Home</a>
+            <a href="#" class="mobile-nav-link" data-category="defi">DeFi</a>
+            <a href="#" class="mobile-nav-link" data-category="nft">NFTs</a>
+            <a href="#" class="mobile-nav-link" data-category="regulation">Regulation</a>
+            <a href="#" class="mobile-nav-link" data-category="market">Markets</a>
+            <a href="#" class="mobile-nav-link" data-category="technology">Technology</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Breaking News</span>
+            <h1 class="hero-title" id="hero-title">Bitcoin Surges Past $50K as Institutional Interest Grows</h1>
+            <p class="hero-excerpt" id="hero-excerpt">Major financial institutions are increasingly showing interest in cryptocurrency investments, driving prices to new heights.</p>
+            <div class="hero-meta">
+                <span class="hero-author">By Sarah Chen</span>
+                <span class="hero-date">December 29, 2025</span>
+                <span class="hero-read-time">5 min read</span>
+            </div>
+            <button class="hero-cta">Read Full Story</button>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-chart" id="hero-chart">
+                <!-- Chart placeholder -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Overview -->
+    <section class="market-overview">
+        <div class="container">
+            <div class="market-header">
+                <h2 class="section-title">Market Overview</h2>
+                <div class="market-timeframe">
+                    <button class="timeframe-btn active" data-period="24h">24H</button>
+                    <button class="timeframe-btn" data-period="7d">7D</button>
+                    <button class="timeframe-btn" data-period="30d">30D</button>
+                </div>
+            </div>
+            <div class="market-stats">
+                <div class="stat-card">
+                    <span class="stat-label">Total Market Cap</span>
+                    <span class="stat-value" id="total-market-cap">$2.45T</span>
+                    <span class="stat-change positive">+2.34%</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">24h Volume</span>
+                    <span class="stat-value" id="volume-24h">$98.2B</span>
+                    <span class="stat-change positive">+15.7%</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">BTC Dominance</span>
+                    <span class="stat-value" id="btc-dominance">42.3%</span>
+                    <span class="stat-change negative">-0.5%</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Fear & Greed Index</span>
+                    <span class="stat-value" id="fear-greed-index">72</span>
+                    <span class="stat-label-small">Greed</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-grid">
+                <!-- News Feed -->
+                <section class="news-feed-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Latest News</h2>
+                        <div class="category-filters">
+                            <button class="filter-chip active" data-category="all">All</button>
+                            <button class="filter-chip" data-category="defi">DeFi</button>
+                            <button class="filter-chip" data-category="nft">NFTs</button>
+                            <button class="filter-chip" data-category="regulation">Regulation</button>
+                            <button class="filter-chip" data-category="market">Markets</button>
+                            <button class="filter-chip" data-category="technology">Tech</button>
+                        </div>
+                    </div>
+                    <div class="news-grid" id="news-grid">
+                        <!-- News cards will be populated by JavaScript -->
+                    </div>
+                    <button class="load-more-btn" id="load-more-btn">Load More Articles</button>
+                </section>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <!-- Trending Topics -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Trending Topics</h3>
+                        <div class="trending-tags" id="trending-tags">
+                            <!-- Trending tags will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Top Gainers -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Top Gainers (24h)</h3>
+                        <div class="gainers-list" id="gainers-list">
+                            <!-- Gainers will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Newsletter -->
+                    <div class="sidebar-widget newsletter-widget">
+                        <h3 class="widget-title">Stay Updated</h3>
+                        <p class="newsletter-text">Get the latest crypto news delivered to your inbox daily.</p>
+                        <form class="newsletter-form" id="newsletter-form">
+                            <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                            <button type="submit" class="newsletter-btn">Subscribe</button>
+                        </form>
+                        <p class="newsletter-note">No spam. Unsubscribe anytime.</p>
+                    </div>
+
+                    <!-- Market movers -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Market Movers</h3>
+                        <div class="market-movers" id="market-movers">
+                            <!-- Market movers will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Featured Categories -->
+    <section class="featured-categories">
+        <div class="container">
+            <h2 class="section-title">Explore Categories</h2>
+            <div class="category-cards">
+                <div class="category-card" data-category="defi">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">DeFi</h3>
+                    <p class="category-desc">Decentralized finance news and analysis</p>
+                </div>
+                <div class="category-card" data-category="nft">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                            <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">NFTs</h3>
+                    <p class="category-desc">Non-fungible token marketplace updates</p>
+                </div>
+                <div class="category-card" data-category="regulation">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Regulation</h3>
+                    <p class="category-desc">Global regulatory developments</p>
+                </div>
+                <div class="category-card" data-category="technology">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Technology</h3>
+                    <p class="category-desc">Blockchain tech and protocol updates</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
+                            <path d="M20 8L20 32M12 16L20 8L28 16M12 24L20 32L28 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="logo-text">CryptoSphere</span>
+                    </a>
+                    <p class="footer-tagline">Your trusted source for blockchain news, market insights, and crypto analysis.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Discord">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Telegram">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 class="footer-title">Categories</h4>
+                    <ul class="footer-link-list">
+                        <li><a href="#">DeFi</a></li>
+                        <li><a href="#">NFTs</a></li>
+                        <li><a href="#">Regulation</a></li>
+                        <li><a href="#">Market Analysis</a></li>
+                        <li><a href="#">Technology</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-link-list">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 class="footer-title">Resources</h4>
+                    <ul class="footer-link-list">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 CryptoSphere. All rights reserved.</p>
+                <p class="disclaimer">Cryptocurrency investments are subject to market risks. DYOR.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast">
+        <span class="toast-message" id="toast-message"></span>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+/* CSS Variables for Dark/Light Theme */
+:root {
+    /* Dark Theme (Default) */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-primary: #3b82f6;
+    --accent-secondary: #f7931a;
+    --accent-glow: rgba(59, 130, 246, 0.15);
+    --positive: #10b981;
+    --positive-bg: rgba(16, 185, 129, 0.1);
+    --negative: #ef4444;
+    --negative-bg: rgba(239, 68, 68, 0.1);
+    --border-color: #334155;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --hover-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 48px;
+
+    /* Layout */
+    --container-width: 1400px;
+    --header-height: 72px;
+    --ticker-height: 40px;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #e2e8f0;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --accent-primary: #2563eb;
+    --accent-secondary: #f7931a;
+    --accent-glow: rgba(37, 99, 235, 0.1);
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --hover-shadow: 0 0 20px rgba(37, 99, 235, 0.15);
+    --border-color: #e2e8f0;
+}

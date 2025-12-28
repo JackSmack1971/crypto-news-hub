@@ -1,0 +1,88 @@
+{
+    "app": {
+        "title": "CryptoSphere - Blockchain News Hub"
+    },
+    "nav": {
+        "home": "Home",
+        "defi": "DeFi",
+        "nft": "NFTs",
+        "regulation": "Regulation",
+        "market": "Markets",
+        "technology": "Technology"
+    },
+    "header": {
+        "search_placeholder": "Search news...",
+        "logo_text": "CryptoSphere"
+    },
+    "hero": {
+        "badge": "Breaking News",
+        "title": "Bitcoin Surges Past $50K as Institutional Interest Grows",
+        "excerpt": "Major financial institutions are increasingly showing interest in cryptocurrency investments, driving prices to new heights.",
+        "cta": "Read Full Story",
+        "read_time_suffix": "min read"
+    },
+    "market": {
+        "title": "Market Overview",
+        "total_cap": "Total Market Cap",
+        "volume_24h": "24h Volume",
+        "btc_dominance": "BTC Dominance",
+        "fear_greed": "Fear & Greed Index",
+        "greed": "Greed",
+        "fear": "Fear"
+    },
+    "news_feed": {
+        "title": "Latest News",
+        "load_more": "Load More Articles",
+        "loading": "Loading...",
+        "no_more": "No more articles to load",
+        "no_results": "No articles found for this category.",
+        "search_no_results": "No results found. Try broader keywords like 'Bitcoin' or 'DeFi'."
+    },
+    "sidebar": {
+        "trending_title": "Trending Topics",
+        "gainers_title": "Top Gainers (24h)",
+        "movers_title": "Market Movers",
+        "newsletter": {
+            "title": "Stay Updated",
+            "text": "Get the latest crypto news delivered to your inbox daily.",
+            "placeholder": "Enter your email",
+            "button": "Subscribe",
+            "note": "No spam. Unsubscribe anytime.",
+            "success": "Successfully subscribed to newsletter!",
+            "error": "Please enter a valid email address"
+        }
+    },
+    "categories": {
+        "title": "Explore Categories",
+        "defi_desc": "Decentralized finance news and analysis",
+        "nft_desc": "Non-fungible token marketplace updates",
+        "regulation_desc": "Global regulatory developments",
+        "technology_desc": "Blockchain tech and protocol updates"
+    },
+    "footer": {
+        "tagline": "Your trusted source for blockchain news, market insights, and crypto analysis.",
+        "headers": {
+            "categories": "Categories",
+            "company": "Company",
+            "resources": "Resources"
+        },
+        "links": {
+            "about": "About Us",
+            "contact": "Contact",
+            "careers": "Careers",
+            "advertise": "Advertise",
+            "press": "Press Kit",
+            "help": "Help Center",
+            "privacy": "Privacy Policy",
+            "terms": "Terms of Service",
+            "cookie": "Cookie Policy",
+            "sitemap": "Sitemap"
+        },
+        "copyright": "© 2025 CryptoSphere. All rights reserved.",
+        "disclaimer": "Cryptocurrency investments are subject to market risks. DYOR."
+    },
+    "messages": {
+        "theme_switched": "Switched to {theme} mode",
+        "opening_article": "Opening"
+    }
+}
