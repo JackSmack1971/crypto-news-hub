@@ -1,22 +1,41 @@
-import { cryptoData } from '../../data.js';
+import { MarketService } from '../services/MarketService.js';
 import { formatNumber, showToast } from '../utils.js';
+
+const COIN_MAP = {
+    'bitcoin': { name: 'Bitcoin', symbol: 'BTC', icon: '₿' },
+    'ethereum': { name: 'Ethereum', symbol: 'ETH', icon: 'Ξ' },
+    'solana': { name: 'Solana', symbol: 'SOL', icon: '◎' },
+    'cardano': { name: 'Cardano', symbol: 'ADA', icon: '₳' }
+};
 
 export class MarketData {
     constructor() {
         this.tickerContainer = document.getElementById('crypto-ticker');
+        this.service = new MarketService();
         this.init();
     }
 
-    init() {
-        this.renderTicker();
-        this.setupTimeframeButtons();
-        this.updateTimestamp();
+    async init() {
+        try {
+            await this.updateMarketData();
+        } catch (error) {
+            console.error('Initial market data fetch failed:', error);
+        }
 
-        // Simulate real-time updates
-        setInterval(() => {
-            this.updatePrices();
+        // Update every 60 seconds (conservative for free tier)
+        setInterval(() => this.updateMarketData(), 60000);
+
+        // Update timestamp independently
+        this.updateTimestamp();
+        setInterval(() => this.updateTimestamp(), 1000);
+    }
+
+    async updateMarketData() {
+        const data = await this.service.getMarketData();
+        if (data) {
+            this.renderTicker(data);
             this.updateTimestamp();
-        }, 30000);
+        }
     }
 
     updateTimestamp() {
@@ -27,11 +46,25 @@ export class MarketData {
         }
     }
 
-    renderTicker() {
-        if (!this.tickerContainer) return;
+    renderTicker(data) {
+        if (!this.tickerContainer || !data) return;
+
+        // Transform API data object -> Array of UI objects
+        const coins = Object.keys(COIN_MAP).map(id => {
+            const apiData = data[id];
+            const meta = COIN_MAP[id];
+
+            if (!apiData) return null;
+
+            return {
+                ...meta,
+                price: apiData.usd,
+                change: apiData.usd_24h_change || 0
+            };
+        }).filter(item => item !== null);
 
         // Duplicate data to create seamless loop
-        const tickerItems = [...cryptoData, ...cryptoData, ...cryptoData, ...cryptoData, ...cryptoData]
+        const tickerItems = [...coins, ...coins, ...coins, ...coins]
             .map(coin => this.createTickerItem(coin))
             .join('');
 
@@ -46,58 +79,9 @@ export class MarketData {
         return `
             <div class="ticker-item">
                 <span class="ticker-symbol">${coin.icon} ${coin.symbol}</span>
-                <span class="ticker-price">$${coin.price.toLocaleString()}</span>
-                <span class="ticker-change ${changeClass}">${changeSign}${coin.change}%</span>
+                <span class="ticker-price">$${coin.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                <span class="ticker-change ${changeClass}">${changeSign}${coin.change.toFixed(2)}%</span>
             </div>
         `;
-    }
-
-    setupTimeframeButtons() {
-        const buttons = document.querySelectorAll('.timeframe-btn');
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Update active state
-                buttons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const period = btn.dataset.period;
-                this.simulateDataUpdate(period);
-            });
-        });
-    }
-
-    simulateDataUpdate(period) {
-        const multipliers = { '24h': 1, '7d': 1.05, '30d': 1.12 };
-        const multiplier = multipliers[period] || 1;
-
-        // Update DOM elements if they exist
-        const capEl = document.getElementById('total-market-cap');
-        const volEl = document.getElementById('volume-24h');
-
-        if (capEl) capEl.textContent = `$${(2.45 * multiplier).toFixed(2)}T`;
-        if (volEl) volEl.textContent = `$${(98.2 * multiplier).toFixed(1)}B`;
-
-        // Randomize change indicator for demo effect
-        const changeEl = document.querySelector('.market-stats .stat-card:first-child .stat-change');
-        if (changeEl) {
-            const change = ((Math.random() - 0.3) * 5).toFixed(2);
-            changeEl.textContent = `${change > 0 ? '+' : ''}${change}%`;
-            changeEl.className = `stat-change ${change > 0 ? 'positive' : 'negative'}`;
-        }
-
-        showToast(`Showing ${period} data`);
-    }
-
-    updatePrices() {
-        // Random price fluctuation for ticker
-        const items = document.querySelectorAll('.ticker-price');
-        items.forEach(item => {
-            const currentPrice = parseFloat(item.textContent.replace('$', '').replace(/,/g, ''));
-            const variance = (Math.random() - 0.5) * 0.01; // 1% variance
-            const newPrice = currentPrice * (1 + variance);
-            item.textContent = `$${newPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-
-            // Flash effect could be added here
-        });
     }
 }

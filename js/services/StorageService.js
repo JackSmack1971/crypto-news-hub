@@ -23,4 +23,42 @@ export class StorageService {
     static remove(key) {
         localStorage.removeItem(key);
     }
+
+    /**
+     * Set item with Time-To-Live (TTL)
+     * @param {string} key 
+     * @param {any} value 
+     * @param {number} ttlInSeconds 
+     */
+    static setWithTTL(key, value, ttlInSeconds) {
+        const now = new Date();
+        const item = {
+            value: value,
+            expiry: now.getTime() + (ttlInSeconds * 1000)
+        };
+        this.set(key, JSON.stringify(item));
+    }
+
+    /**
+     * Get item if not expired
+     * @param {string} key 
+     * @returns {any|null} value or null if expired/missing
+     */
+    static getWithTTL(key) {
+        const itemStr = this.get(key);
+        if (!itemStr) return null;
+
+        try {
+            const item = JSON.parse(itemStr);
+            const now = new Date();
+
+            if (now.getTime() > item.expiry) {
+                this.remove(key);
+                return null;
+            }
+            return item.value;
+        } catch (e) {
+            return null;
+        }
+    }
 }
