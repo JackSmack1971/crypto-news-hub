@@ -1483,6 +1483,49 @@ input {
     color: var(--text-secondary);
 }
 
+/* Newsletter Privacy */
+.newsletter-privacy {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 8px;
+}
+
+/* Newsletter States */
+.newsletter-input.error {
+    border-color: var(--accent-danger);
+    animation: shake 0.4s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+.btn.success {
+    background-color: var(--accent-success);
+    border-color: var(--accent-success);
+}
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
 @media (max-width: 768px) {
     .modal-image {
         height: 200px;

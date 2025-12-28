@@ -1,8 +1,10 @@
-import { showToast, validateEmail } from '../utils.js';
+import { showToast } from '../utils.js';
 import { StorageService } from '../services/StorageService.js';
+import { NewsletterService } from '../services/NewsletterService.js';
 
 export class Sidebar {
     constructor() {
+        this.newsletterService = new NewsletterService();
         this.init();
     }
 
@@ -50,39 +52,51 @@ export class Sidebar {
         const form = document.getElementById('newsletter-form');
         if (!form) return;
 
+        const btn = form.querySelector('button');
+        const input = form.querySelector('input');
+        const privacyText = document.querySelector('.newsletter-privacy');
+
         // Check if already subscribed
         if (StorageService.get('newsletter_subscribed')) {
-            const btn = form.querySelector('button');
-            const input = form.querySelector('input');
-            if (btn) {
-                btn.textContent = window.i18n ? window.i18n.t('sidebar.newsletter.subscribed') : 'Subscribed';
-                btn.disabled = true;
-            }
-            if (input) input.disabled = true;
+            this.setSubscribedState(btn, input);
         }
 
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const input = form.querySelector('.newsletter-input');
+
             const email = input.value;
+            btn.disabled = true;
+            btn.textContent = window.i18n ? window.i18n.t('sidebar.newsletter.subscribing') : 'Subscribing...';
 
-            // Simple email validation using regex from utils (or inline if not exported)
-            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            // Call Service
+            const result = await this.newsletterService.subscribe(email);
 
-            if (isValid) {
-                const msg = window.i18n ? window.i18n.t('sidebar.newsletter.success') : 'Successfully subscribed!';
-                showToast(msg);
-                input.value = '';
-                StorageService.set('newsletter_subscribed', 'true');
-
-                const btn = form.querySelector('button');
-                btn.textContent = window.i18n ? window.i18n.t('sidebar.newsletter.subscribed') : 'Subscribed';
-                btn.disabled = true;
-                input.disabled = true;
+            if (result.success) {
+                showToast(result.message);
+                this.setSubscribedState(btn, input);
+                if (privacyText) privacyText.style.display = 'none'; // Hide privacy text on success
             } else {
-                const msg = window.i18n ? window.i18n.t('sidebar.newsletter.error') : 'Invalid email';
-                showToast(msg);
+                showToast(result.message);
+                input.classList.add('error');
+                btn.disabled = false;
+                btn.textContent = window.i18n ? window.i18n.t('sidebar.newsletter.button') : 'Subscribe';
+
+                // Shake animation or similar could go here
+                setTimeout(() => input.classList.remove('error'), 2000);
             }
         });
+    }
+
+    setSubscribedState(btn, input) {
+        if (btn) {
+            btn.textContent = window.i18n ? window.i18n.t('sidebar.newsletter.subscribed') : 'Subscribed';
+            btn.classList.add('success');
+            btn.disabled = true;
+        }
+        if (input) {
+            input.disabled = true;
+            input.value = '';
+            input.placeholder = 'Thanks for subscribing!';
+        }
     }
 }

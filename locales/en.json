@@ -49,7 +49,9 @@
             "button": "Subscribe",
             "note": "No spam. Unsubscribe anytime.",
             "success": "Successfully subscribed to newsletter!",
-            "error": "Please enter a valid email address"
+            "error": "Please enter a valid email address",
+            "subscribing": "Subscribing...",
+            "subscribed": "Subscribed"
         }
     },
     "categories": {

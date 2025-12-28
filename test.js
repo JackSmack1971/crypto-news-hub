@@ -185,6 +185,42 @@ async function testWebsite() {
             console.log('⚠ No cards to click for modal test');
         }
 
+        // Test Newsletter Subscription
+        console.log('\nTesting Newsletter Subscription...');
+        const newsletterForm = await page.$('#newsletter-form');
+        if (newsletterForm) {
+            // 1. Invalid Email
+            console.log('Testing invalid email...');
+            await page.fill('.newsletter-input', 'invalid-email');
+            await page.click('#newsletter-form button');
+            await page.waitForTimeout(1200);
+
+            const hasError = await page.$eval('.newsletter-input', el => el.classList.contains('error'));
+            console.log(`Error state applied: ${hasError ? '✓' : '✗'}`);
+            if (!hasError) errors.push('Newsletter failed to show error for invalid email');
+
+            // 2. Valid Email
+            console.log('Testing valid email...');
+            await page.fill('.newsletter-input', 'test@example.com');
+            await page.click('#newsletter-form button');
+            await page.waitForTimeout(1000); // Wait for service promise
+
+            const btnText = await page.textContent('#newsletter-form button');
+            const isDisabled = await page.$eval('#newsletter-form button', el => el.disabled);
+
+            console.log(`Button text: "${btnText}"`);
+            console.log(`Button disabled: ${isDisabled}`);
+
+            if (isDisabled && (btnText === 'Subscribed' || btnText === 'Subscribed')) { // Handling i18n
+                console.log('✓ Newsletter subscription successful');
+            } else {
+                errors.push('Newsletter subscription failed verification');
+            }
+
+        } else {
+            errors.push('Newsletter form not found');
+        }
+
     } catch (err) {
         errors.push(`Test error: ${err.message}`);
     }
