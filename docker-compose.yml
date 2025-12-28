@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  gotrue:
+    image: netlify/gotrue:v2.5.12
+    ports:
+      - "9999:9999"
+    environment:
+      GOTRUE_SITE_URL: http://localhost:3000
+      GOTRUE_JWT_SECRET: local-dev-secret
+      GOTRUE_DB_DRIVER: mysql
+      GOTRUE_DATABASE_URL: gotrue:rootpassword@tcp(db:3306)/gotrue?parseTime=true
+    depends_on:
+      - db
+    command: ["gotrue"]
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: gotrue
+      MYSQL_USER: gotrue
+      MYSQL_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
