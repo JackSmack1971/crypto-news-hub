@@ -1,0 +1,9 @@
+[build]
+  # No build command needed for vanilla JS/HTML
+  command = "" 
+  # Serve files from the root directory
+  publish = "." 
+
+# Ensure git-gateway is ready for Decap CMS
+[dev]
+  framework = "#static"
